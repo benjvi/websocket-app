@@ -6,4 +6,15 @@ wss.on('connection', function(ws) {
     ws.send("Back");
   });
   ws.send('something');
+
+  var intervalID = setInterval(function() {
+    var d = Date.now()
+    ws.send(`hello from the server -- ${d}`);
+  }, 1000);
+
+  ws.on("close", function() {
+    clearInterval(intervalID);
+  });
 });
+
+
